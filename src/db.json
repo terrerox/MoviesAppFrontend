@@ -1,0 +1,13 @@
+{
+    "movies": [
+      { 
+        "id": 1, 
+        "title": "spiderman", 
+        "release_date": "2022-02-12",
+        "image_url": "url",
+        "about": "un chamaquito que lo mordio una araña",
+        "cast": ["yo", "tu", "ellos", "ellas"],
+        "directors": ["yo", "tu"]
+      }
+    ]
+}
