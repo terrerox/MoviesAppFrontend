@@ -1,20 +1,19 @@
 import {useEffect, useRef, useState} from 'react'
+import movieService from '../services/movieService'
 
-export const useFetch = (url) => {
+
+export const useGetAll = () => {
   const isMounted = useRef(true)
   const [state, setState] = useState({
     error: false,
-    data: undefined
+    data: []
   })
   
   useEffect(() => {
-    if(!url) return 
-
     isMounted.current = true
 
     const fetchData = () => {
-      return fetch(url)
-      .then(res => res.json())
+      return movieService.getAll()
       .then(data => {
         if (isMounted.current) {
           setState({
@@ -30,7 +29,7 @@ export const useFetch = (url) => {
     return () => {
       isMounted.current = false
     }
-  }, [url])
+  }, [])
 
   return state
 }

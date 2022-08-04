@@ -1,23 +1,25 @@
 import { useEffect, useState } from 'react'
 
 
-export const useSearch = (people, inputValue) => {
-    const [state, setState] = useState()
+export const useSearch = (movies, inputValue) => {
+    const [state, setState] = useState([])
 
     useEffect(() => {
-        const filterByName = () => {
+        if(!movies) return 
+
+        const filterByTitle = () => {
 
             const value = inputValue.trim().toLowerCase()
             setState(
-                people.filter(person => {
-                    const name = person.name.toLowerCase()
-                    return name.includes(value)
+                movies.filter(movie => {
+                    const title = movie.title.toLowerCase()
+                    return title.includes(value)
                 })
             )
         }
-        filterByName()
+        filterByTitle()
 
-    }, [inputValue, people])
+    }, [inputValue, movies])
 
     return state
 }
