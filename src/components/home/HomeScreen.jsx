@@ -7,8 +7,9 @@ import './Home.css'
 
 export const HomeScreen = () => {
   const [inputValue, setInputValue] = useState("")
-  const { data } = useGetAll()
-  const movies = useSearch(data, inputValue)
+  const { response } = useGetAll()
+
+  const movies = useSearch(response, inputValue)
 
   return (
     <main className="App">
@@ -17,15 +18,15 @@ export const HomeScreen = () => {
       </section>
       <section className="cards">
       {
-          !data && <p className="loading">Loading...</p>
+          !response && <p className="loading">Loading...</p>
         }
        {
-           data && (
+           response && (
             movies.length === 0 && <p className="notFoundMsg">Movie not found</p>
            )
        } 
        {
-           data && (
+           response && (
             movies.map(movie => (
               <Card 
                 key={movie.id} 

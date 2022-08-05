@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react'
 
 
-export const useSearch = (movies, inputValue) => {
+export const useSearch = (response, inputValue) => {
     const [state, setState] = useState([])
 
     useEffect(() => {
-        if(!movies) return 
+        if(!response) return
 
         const filterByTitle = () => {
-
+            const { data } = response
             const value = inputValue.trim().toLowerCase()
             setState(
-                movies.filter(movie => {
+                data.filter(movie => {
                     const title = movie.title.toLowerCase()
                     return title.includes(value)
                 })
@@ -19,7 +19,7 @@ export const useSearch = (movies, inputValue) => {
         }
         filterByTitle()
 
-    }, [inputValue, movies])
+    }, [inputValue, response])
 
     return state
 }

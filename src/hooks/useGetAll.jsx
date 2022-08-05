@@ -6,7 +6,7 @@ export const useGetAll = () => {
   const isMounted = useRef(true)
   const [state, setState] = useState({
     error: false,
-    data: []
+    response: null
   })
   
   useEffect(() => {
@@ -14,11 +14,11 @@ export const useGetAll = () => {
 
     const fetchData = () => {
       return movieService.getAll()
-      .then(data => {
+      .then(response => {
         if (isMounted.current) {
           setState({
               error: false,
-              data
+              response
           })
         }
       })
