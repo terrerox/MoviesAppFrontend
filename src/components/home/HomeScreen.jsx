@@ -3,8 +3,6 @@ import { Card } from './Card'
 import { useGetAll } from '../../hooks/useGetAll'
 import { useSearch } from '../../hooks/useSearch'
 
-import './Home.css'
-
 export const HomeScreen = () => {
   const [inputValue, setInputValue] = useState("")
   const { response } = useGetAll()
@@ -25,16 +23,17 @@ export const HomeScreen = () => {
             movies.length === 0 && <p className="notFoundMsg">Movie not found</p>
            )
        } 
-       {
-           response && (
+       
+        <div className='row'>
+           {response && (
             movies.map(movie => (
               <Card 
                 key={movie.id} 
                 movie={movie}
               />
             ))
-          )
-       }
+          )}
+          </div>
       </section>
     </main>
   )

@@ -2,7 +2,7 @@ import { httpClient } from '../helpers'
 const movieService = {}
 
 movieService.getAll = () => {
-  return httpClient.get('movies')
+  return httpClient.get('Movie/Get')
     .then(response => response)
 }
 
