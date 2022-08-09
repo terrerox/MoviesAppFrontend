@@ -6,11 +6,15 @@ import { AdminScreen } from '../components/admin/AdminScreen';
 import { MovieScreen } from '../components/movie/MovieScreen';
 import { AppContext } from '../context';
 
+const DEFAULT_STATE = {
+    isAuthenticated: false,
+    user: {} 
+}
+
+const SAVED_STATE = JSON.parse(localStorage.getItem("user"))
+
 export const AppRouter = () => {
-    const [user, setUser] = useState({
-        isAuthenticated: false,
-        user: {}
-    })
+    const [user, setUser] = useState(SAVED_STATE || DEFAULT_STATE)
 
     const saveUser = (values) => {
         setUser(values)
