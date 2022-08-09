@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 import '../login/LoginScreen.css'
+import { AppContext } from '../../context';
 import accountService from '../../services/accountService';
 import viteimg from '../../assets/react.svg'
 import { useNavigate } from 'react-router-dom';
 
 export const LoginScreen = () => {
 
+  const { saveUser } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [state,setState] = useState({
@@ -44,11 +46,16 @@ export const LoginScreen = () => {
       })
     }
     else{
-      localStorage.setItem("user-name",response.data.firstName)
-      localStorage.setItem("user-lastname",response.data.lastName)
-      localStorage.setItem("token","Bearer " + response.data.jwToken)
-    navigate("/admin");
-
+      const { jwToken, userName, email } = response.data
+      saveUser({
+        isAuthenticated: true,
+        user: {
+          userName,
+          email,
+          jwToken
+        }
+      })
+      navigate("/admin");
     }
 
   }
