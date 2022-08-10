@@ -6,6 +6,12 @@ movieService.getAll = () => {
     .then(response => response)
 }
 
+movieService.getById = (id) => {
+  return httpClient.get(`Movie/GetByIdInfo/${id}`)
+    .then(response => response)
+}
+
+
 movieService.update = (movie) => {
   return httpClient.put('movies', movie)
     .then(response => response.data.data)

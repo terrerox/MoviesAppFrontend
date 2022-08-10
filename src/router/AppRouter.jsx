@@ -8,6 +8,9 @@ import { AppContext } from '../context';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import MenuScreen from '../components/menu/MenuScreen';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.js';
 
 const DEFAULT_STATE = {
     isAuthenticated: false,
@@ -24,6 +27,8 @@ export const AppRouter = () => {
     const { isAuthenticated } = user
     return (
         <AppContext.Provider value={{user: user, saveUser }}> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <MenuScreen/>
             <BrowserRouter>
                 <Routes>
                     <Route path="/*" element={
@@ -38,7 +43,7 @@ export const AppRouter = () => {
                             isAuthenticated={isAuthenticated}
                         />} 
                     />
-                    <Route path="/:movie" element={
+                    <Route path='/movie/:movieId' element={
                         <PublicRoute 
                             element={MovieScreen} 
                             isAuthenticated={isAuthenticated}
