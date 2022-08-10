@@ -63,9 +63,9 @@ export const LoginScreen = () => {
       <div className='row d-flex justify-content-center mt-4'>
         <div className='col-lg-4'>
         <div className='card bg-dark'>
-          <div className='card-body'>
+          <div className='card-body w-100'>
             <div className='d-flex justify-content-center'>
-            <img src={viteimg}/>
+            <a className="navbar-brand text-top" href="#"><i className="fa-solid fa-clapperboard menu-icon"></i>&nbsp;&nbsp;&nbsp;<span className="font-size logo-color">FLJJ</span><span className="font-size text-white">  MOVIE</span></a>
             </div>
             {
              state.error === true ? 

@@ -134,7 +134,7 @@ a {
 
 a {
     color: #007bff;
-    text-decoration: none;
+    text-decoration: none!important;
     background-color: transparent;
 }
 

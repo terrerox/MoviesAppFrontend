@@ -8,7 +8,7 @@ import { AppContext } from '../context';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import MenuScreen from '../components/menu/MenuScreen';
+import MenuScreen from '../components/layout/MenuScreen';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 

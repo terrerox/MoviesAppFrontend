@@ -3,7 +3,7 @@ import { Card } from './Card'
 import { useGetAll } from '../../hooks/useGetAll'
 import { useSearch } from '../../hooks/useSearch'
 import '../home/HomeScreen.css'
-import { HomeHead } from './HomeHead'
+import { HomeHead } from '../layout/HomeHead'
 
 export const HomeScreen = () => {
   const [inputValue, setInputValue] = useState("")
@@ -14,9 +14,10 @@ export const HomeScreen = () => {
   return (
     <main className="App">
       <section className="content">
-        <HomeHead/>
+        <HomeHead page="Home"/>
         <section className="search">
-        <input type="search" placeholder="Find by title" onChange={e => setInputValue(e.target.value)} />
+{/*         <input type="search" placeholder="Find by title" onChange={e => setInputValue(e.target.value)} />
+ */}
       </section>
         {
           error && <p className="errorMsg">{ errorMensage }</p>

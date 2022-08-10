@@ -7,7 +7,7 @@ export const useGetById = (id) => {
   const [state, setState] = useState({
     error: false,
     errorMensage: '',
-    response: null
+    response: {}
   })
   
   useEffect(() => {

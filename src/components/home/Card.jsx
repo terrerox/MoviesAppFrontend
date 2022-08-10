@@ -3,9 +3,6 @@ import './Card.css'
 import { Link } from 'react-router-dom';
 
 export const Card = ({ movie }) => {
-  const goToMovie = () => {
-    console.log('klok')
-  }
 
   let getDate = new Date(movie.launchedDate);
 
