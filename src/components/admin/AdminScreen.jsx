@@ -1,7 +1,15 @@
 import React from 'react'
+import { MoviesTable } from './movies/MoviesTable'
 
 export const AdminScreen = () => {
   return (
-    <div>AdminScreen</div>
+    <main className='container'>
+      <section>
+        <MoviesTable />
+      </section>
+      <section>
+
+      </section>
+    </main>
   )
 }

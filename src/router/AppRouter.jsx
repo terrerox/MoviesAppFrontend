@@ -1,24 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { LoginScreen } from '../components/login/LoginScreen';
 import { HomeScreen } from '../components/home/HomeScreen';
 import { AdminScreen } from '../components/admin/AdminScreen';
 import { MovieScreen } from '../components/movie/MovieScreen';
 import { AppContext } from '../context';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const DEFAULT_STATE = {
     isAuthenticated: false,
     user: {} 
 }
 
-const SAVED_STATE = JSON.parse(localStorage.getItem("user"))
-
 export const AppRouter = () => {
-    const [user, setUser] = useState(SAVED_STATE || DEFAULT_STATE)
+    const [user, setUser] = useState(DEFAULT_STATE)
 
     const saveUser = (values) => {
         setUser(values)
-        localStorage.setItem("user", JSON.stringify(values))
     }
 
     const { isAuthenticated } = user

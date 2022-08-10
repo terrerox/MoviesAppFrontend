@@ -1,6 +1,4 @@
 import { useState, useContext } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.js';
 import '../login/LoginScreen.css'
 import { AppContext } from '../../context';
 import accountService from '../../services/accountService';

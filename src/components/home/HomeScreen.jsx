@@ -5,35 +5,38 @@ import { useSearch } from '../../hooks/useSearch'
 
 export const HomeScreen = () => {
   const [inputValue, setInputValue] = useState("")
-  const { response } = useGetAll()
+  const { response, error, errorMensage } = useGetAll()
 
   const movies = useSearch(response, inputValue)
 
   return (
     <main className="App">
       <section className="search">
-        <input type="search" placeholder="Find by title" onChange={e => setInputValue(e.target.value)}/>
+        <input type="search" placeholder="Find by title" onChange={e => setInputValue(e.target.value)} />
       </section>
       <section className="cards">
-      {
-          !response && <p className="loading">Loading...</p>
+        {
+          error && <p className="errorMsg">{ errorMensage }</p>
         }
-       {
-           response && (
+        {
+          (!response && !error) && <p className="loading">Loading...</p>
+        }
+        {
+          response && (
             movies.length === 0 && <p className="notFoundMsg">Movie not found</p>
-           )
-       } 
-       
+          )
+        }
+
         <div className='row'>
-           {response && (
+          {response && (
             movies.map(movie => (
-              <Card 
-                key={movie.id} 
+              <Card
+                key={movie.id}
                 movie={movie}
               />
             ))
           )}
-          </div>
+        </div>
       </section>
     </main>
   )

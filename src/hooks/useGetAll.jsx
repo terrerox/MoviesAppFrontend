@@ -6,6 +6,7 @@ export const useGetAll = () => {
   const isMounted = useRef(true)
   const [state, setState] = useState({
     error: false,
+    errorMensage: '',
     response: null
   })
   
@@ -21,6 +22,12 @@ export const useGetAll = () => {
               response
           })
         }
+      })
+      .catch(err => {
+        setState({
+          error: true,
+          errorMensage: err.message
+        })
       })
     }
 
