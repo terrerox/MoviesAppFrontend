@@ -10,7 +10,10 @@ export const MoviesFormScreen = () => {
     image: "",
     youtubeVideoUrl: "",
     description: "",
-    publishDate: ""
+    publishDate: "",
+    actorIds: [],
+    categoryId: 0,
+    directorIds: []
   })
   // useEffect(() => {
   //   setValues({
@@ -43,7 +46,7 @@ export const MoviesFormScreen = () => {
         <div className="form-holder">
           <div className="form-content">
             <div className="form-items">
-              <h3>Register Today</h3>
+              <h3>Add movie</h3>
               <p>Fill in the data below.</p>
               <MoviesForm 
                 formValues={formValues}

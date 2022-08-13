@@ -1,8 +1,27 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
+import actorService from '../../../services/actorService'
+import directorService from '../../../services/directorService'
+import movieCategoryService from '../../../services/movieCategoryService'
 
 export const MoviesForm = ({ formValues, handleInputChange, handleSubmit }) => {
-    const { title, image, youtubeVideoUrl, description, publishDate } = formValues
+    const { title, image, youtubeVideoUrl, description, publishDate, actor, category, director } = formValues
+    const [actors, setActors] = useState([])
+    const [directors, setDirectors] = useState([])
+    const [categories, setCategories] = useState([])
 
+    useEffect(() => {
+      Promise.all([
+        movieCategoryService.getAll(),
+        directorService.getAll(),
+        actorService.getAll()
+      ]).then(values => {
+        const [categories, directors, actors] = values
+        setActors(actors)
+        setDirectors(directors)
+        setCategories(categories)
+      })
+    }, [])
+    
     return (
         <form onSubmit={handleSubmit}>
 
@@ -58,6 +77,39 @@ export const MoviesForm = ({ formValues, handleInputChange, handleSubmit }) => {
                     onChange={handleInputChange}
                     placeholder='Publish Date'
                 />
+            </div>
+            <div className="col-md-12">
+                <label>Select actor</label>
+                <select name="actorIds" onChange={handleInputChange} multiple size={actors.length}>
+                    <option value="none" selected disabled hidden>Select an Option</option>
+                    {
+                        actors.map(actor => (
+                            <option key={actor.id} value={Number(actor.id)}>{actor.name}</option>
+                        ))
+                    }
+                </select>
+            </div>
+            <div className="col-md-12">
+                <label>Select category</label>
+                <select name="categoryId" onChange={handleInputChange}>
+                    <option value="none" selected disabled hidden>Select an Option</option>
+                    {
+                        categories.map(category => (
+                            <option key={category.id} value={Number(category.id)}>{category.name}</option>
+                        ))
+                    }
+                </select>
+            </div>
+            <div className="col-md-12">
+                <label>Select director</label>
+                <select name="directorIds" onChange={handleInputChange} multiple size={directors.length}>
+                    <option value="none" selected disabled hidden>Select an Option</option>
+                    {
+                        directors.map(director => (
+                            <option key={director.id} value={Number(director.id)}>{director.name}</option>
+                        ))
+                    }
+                </select>
             </div>
 
             <div className="form-button mt-3">

@@ -1,5 +1,8 @@
 import React from 'react'
 import { MoviesTable } from './movies/MoviesTable'
+import { Link } from 'react-router-dom';
+
+
 
 export const AdminScreen = () => {
   return (
@@ -10,9 +13,9 @@ export const AdminScreen = () => {
             Movies
           </h3>
           <div className="col-md-6">
-            <button>
+            <Link to="/admin/movie">
               New movie
-            </button>
+            </Link>
           </div>
         </div>
         <MoviesTable />
