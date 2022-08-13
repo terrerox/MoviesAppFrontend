@@ -1,6 +1,9 @@
 import React from 'react'
+import { useGetAll } from '../../../hooks/useGetAll'
 
 export const MoviesTable = () => {
+    const { response, error, errorMensage } = useGetAll()
+
     return (
         <table class="table">
             <thead>
@@ -12,23 +15,22 @@ export const MoviesTable = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                {
+                    error && <p className="errorMsg">{errorMensage}</p>
+                }
+                {
+                    (!response && !error) && <p className="loading">Loading...</p>
+                }
+                {
+                    (response && !error) && response.data.map(movie => (
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                    ))
+                }
             </tbody>
         </table>
     )

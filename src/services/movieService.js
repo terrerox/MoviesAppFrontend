@@ -18,8 +18,9 @@ movieService.update = (movie) => {
 }
 
 movieService.add = (movie) => {
-  return httpClient.post('movies', movie)
-    .then(response => response.data.data)
+  return httpClient.post('Movie/Create', movie)
+    .then(console.log)
+    .catch(console.log)
 }
 
 movieService.delete = (id) => {

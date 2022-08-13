@@ -4,6 +4,7 @@ import { LoginScreen } from '../components/login/LoginScreen';
 import { HomeScreen } from '../components/home/HomeScreen';
 import { AdminScreen } from '../components/admin/AdminScreen';
 import { MovieScreen } from '../components/movie/MovieScreen';
+import { MoviesFormScreen } from '../components/admin/movies/MoviesFormScreen';
 import { AppContext } from '../context';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
@@ -40,6 +41,12 @@ export const AppRouter = () => {
                     <Route path="/admin" element={
                         <PrivateRoute 
                             element={AdminScreen} 
+                            isAuthenticated={isAuthenticated}
+                        />} 
+                    />
+                    <Route path="/admin/movie" element={
+                        <PublicRoute 
+                            element={MoviesFormScreen} 
                             isAuthenticated={isAuthenticated}
                         />} 
                     />
