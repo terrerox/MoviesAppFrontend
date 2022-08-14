@@ -1,10 +1,18 @@
 import React from 'react'
 import { MoviesTable } from './movies/MoviesTable'
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
 export const AdminScreen = () => {
+  const navigate = useNavigate()
+
+  const goToAddMovie = () => {
+    const locationData = {
+      state: { movie: false }
+  }
+    navigate("/admin/movie", locationData)
+  }
   return (
     <main className='container'>
       <section>
@@ -13,9 +21,9 @@ export const AdminScreen = () => {
             Movies
           </h3>
           <div className="col-md-6">
-            <Link to="/admin/movie">
+            <button onClick={goToAddMovie}>
               New movie
-            </Link>
+            </button>
           </div>
         </div>
         <MoviesTable />

@@ -76,11 +76,11 @@ export const LoginScreen = () => {
               }
                 <form onSubmit={handleSubmit}>
                   <div className='form-group'>
-                <label className='form-label text-white' for='email'>Email: </label>
+                <label className='form-label text-white' htmlFor='email'>Email: </label>
                 <input className='form-control' type="text" name='email' id='email' onChange={handleInput}/>
                 </div>
                 <div className='form-group mt-3'>
-                <label className='form-label text-white' for='password'>Password: </label>
+                <label className='form-label text-white' htmlFor='password'>Password: </label>
                 <input className='form-control' type="password" name='password' id='password' onChange={handleInput}/>
                 </div>
                 <button className='btn btn-success bg-custom w-25 mt-4 float-end' type="submit" onClick={handlebutton}>Login</button>

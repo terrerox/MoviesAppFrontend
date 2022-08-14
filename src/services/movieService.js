@@ -13,8 +13,8 @@ movieService.getById = (id) => {
 
 
 movieService.update = (movie) => {
-  return httpClient.put('movies', movie)
-    .then(response => response.data.data)
+  return httpClient.put('Movie/Update/' + movie.id, movie)
+    .then(response => response)
 }
 
 movieService.add = (movie) => {
@@ -24,8 +24,8 @@ movieService.add = (movie) => {
 }
 
 movieService.delete = (id) => {
-  return httpClient.delete(`movies/${id}`)
-    .then(response => response.data.data)
+  return httpClient.delete(`Movie/Delete/${id}`)
+    .then(console.log)
 }
 
 export default movieService

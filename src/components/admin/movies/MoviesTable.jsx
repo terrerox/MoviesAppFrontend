@@ -1,12 +1,35 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { useGetAll } from '../../../hooks/useGetAll'
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import movieService from '../../../services/movieService';
 
 export const MoviesTable = () => {
     const { response, error, errorMensage } = useGetAll()
+    const navigate = useNavigate()
+    const [movies, setMovies] = useState()
 
+    useEffect(() => {
+        if (response) {
+            setMovies(response.data)
+        }
+
+    }, [response])
+
+
+    const deleteMovie = (id) => {
+        return movieService.delete(id).then(() => {
+            setMovies(movies => movies.filter(movie => movie.id !== id))
+        })
+    }
+
+    const goToUpdateMovie = (movie) => {
+        const locationData = {
+            state: { movie }
+        }
+        navigate('/admin/movie', locationData)
+    }
     return (
-        <table class="table">
+        <table className="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -18,21 +41,21 @@ export const MoviesTable = () => {
             </thead>
             <tbody>
                 {
-                    error && <p className="errorMsg">{errorMensage}</p>
+                    error && <h4 className="errorMsg">{errorMensage}</h4>
                 }
                 {
-                    (!response && !error) && <p className="loading">Loading...</p>
+                    ((!response && !error) && !movies) && <h4 className="loading">Loading...</h4>
                 }
                 {
-                    (response && !error) && response.data.map(movie => (
-                        <tr>
+                    ((response && !error) && movies) && movies.map(movie => (
+                        <tr key={movie.id}>
                             <th scope="row">{movie.id}</th>
                             <td>{movie.title}</td>
                             <td>{movie.image}</td>
                             <td>{movie.youtubeVideoURL}</td>
                             <td>{movie.launchedDate}</td>
-                            <td><button>Edit</button></td>
-                            <td><button>Delete</button></td>
+                            <td><button onClick={() => goToUpdateMovie(movie)}>Edit</button></td>
+                            <td><button onClick={() => deleteMovie(movie.id)}>Delete</button></td>
                         </tr>
                     ))
                 }

@@ -4,24 +4,22 @@ import directorService from '../../../services/directorService'
 import movieCategoryService from '../../../services/movieCategoryService'
 
 export const MoviesForm = ({ formValues, handleInputChange, handleSubmit }) => {
-    const { title, image, youtubeVideoUrl, description, publishDate, actor, category, director } = formValues
+    const { title, image, youtubeVideoUrl, description, publishDate, actorIds, categoryId, directorIds } = formValues
     const [actors, setActors] = useState([])
     const [directors, setDirectors] = useState([])
     const [categories, setCategories] = useState([])
 
-    useEffect(() => {
-      Promise.all([
+    Promise.all([
         movieCategoryService.getAll(),
         directorService.getAll(),
         actorService.getAll()
-      ]).then(values => {
+    ]).then(values => {
         const [categories, directors, actors] = values
         setActors(actors)
         setDirectors(directors)
         setCategories(categories)
-      })
-    }, [])
-    
+    })
+
     return (
         <form onSubmit={handleSubmit}>
 
@@ -71,7 +69,7 @@ export const MoviesForm = ({ formValues, handleInputChange, handleSubmit }) => {
             <div className="col-md-12">
                 <label>Publish Date</label>
                 <input
-                    type="date"
+                    type="datetime-local"
                     value={publishDate}
                     name="publishDate"
                     onChange={handleInputChange}
@@ -91,7 +89,7 @@ export const MoviesForm = ({ formValues, handleInputChange, handleSubmit }) => {
             </div>
             <div className="col-md-12">
                 <label>Select category</label>
-                <select name="categoryId" onChange={handleInputChange}>
+                <select name="categoryId" onChange={handleInputChange} value={categoryId.id}>
                     <option value="none" selected disabled hidden>Select an Option</option>
                     {
                         categories.map(category => (

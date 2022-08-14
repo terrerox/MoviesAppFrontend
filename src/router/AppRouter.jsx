@@ -19,7 +19,7 @@ const DEFAULT_STATE = {
 }
 
 export const AppRouter = () => {
-    const [user, setUser] = useState(DEFAULT_STATE)
+    const [user, setUser] = useLocalStorage('user', DEFAULT_STATE)
 
     const saveUser = (values) => {
         setUser(values)
@@ -45,7 +45,7 @@ export const AppRouter = () => {
                         />} 
                     />
                     <Route path="/admin/movie" element={
-                        <PublicRoute 
+                        <PrivateRoute 
                             element={MoviesFormScreen} 
                             isAuthenticated={isAuthenticated}
                         />} 

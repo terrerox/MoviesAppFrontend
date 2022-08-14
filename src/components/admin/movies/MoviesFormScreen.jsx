@@ -1,8 +1,9 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { MoviesForm } from './MoviesForm'
 import { useForm } from '../../../hooks/useForm'
 import movieService from '../../../services/movieService'
 import './MoviesForm.css'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export const MoviesFormScreen = () => {
   const [formValues, handleInputChange, setValues] = useForm({
@@ -15,15 +16,22 @@ export const MoviesFormScreen = () => {
     categoryId: 0,
     directorIds: []
   })
-  // useEffect(() => {
-  //   setValues({
-  //       title: book.title || "",
-  //       description: book.description || "",
-  //       pageCount: book.pageCount || 0,
-  //       excerpt: book.excerpt || "",
-  //       publishDate: book.publishDate || ""
-  //   })
-  // }, [book])
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { movie } = location.state
+
+  useEffect(() => {
+    setValues({
+      title: movie.title || "",
+      image: movie.image || "",
+      youtubeVideoUrl: movie.youtubeVideoUrl || "",
+      description: movie.description || "",
+      publishDate: movie.publishDate || "",
+      actorIds: movie.actorIds || [],
+      categoryId: movie.categoryId || 0,
+      directorIds: movie.directorIds || []
+    })
+  }, [movie])
 
   const { title, image, youtubeVideoUrl, description, publishDate } = formValues
 
@@ -33,12 +41,14 @@ export const MoviesFormScreen = () => {
       return alert("llena eso miop")
     }
 
-    // if (book.id) {
-    //     return updateBook(formValues)
-    // } 
+    if (movie) {
+      const payload = {id: movie.id, ...formValues}
+      movieService.update(payload)
+      return navigate('admin')
+    }
 
     movieService.add(formValues)
-
+    navigate('admin')
   }
   return (
     <div className="form-body">
@@ -46,9 +56,9 @@ export const MoviesFormScreen = () => {
         <div className="form-holder">
           <div className="form-content">
             <div className="form-items">
-              <h3>Add movie</h3>
+              <h3>{movie ? 'Update Movie' : 'Add Movie'}</h3>
               <p>Fill in the data below.</p>
-              <MoviesForm 
+              <MoviesForm
                 formValues={formValues}
                 handleInputChange={handleInputChange}
                 handleSubmit={handleSubmit}

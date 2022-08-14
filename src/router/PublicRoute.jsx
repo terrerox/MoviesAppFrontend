@@ -4,5 +4,5 @@ export const PublicRoute = ({
     isAuthenticated,
     element: Component
 }) => (
-    !isAuthenticated ? <Component /> : <Navigate to="/" />
+    !isAuthenticated ? <Component /> : <Navigate to="/admin" />
 )
