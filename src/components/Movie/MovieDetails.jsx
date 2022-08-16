@@ -1,6 +1,7 @@
 import React from "react"
 import './MovieDetails.css'
 import '../home/Card'
+import { ActorCard } from "../actor/ActorCard";
 
 export const MovieDetails = ({ movie }) =>{
     let getDate = new Date(movie.launchedDate);
@@ -43,6 +44,26 @@ export const MovieDetails = ({ movie }) =>{
                 <div className="col-4 col-xl-4">
                 <iframe width="450" height="315" src={movie.youtubeVideoURL} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen className="mt-2"></iframe>
                 </div>
+            </div>
+            <div className="row mt-3">
+                <h4 className="text-white">Directors</h4>
+                {
+                    movie.directors.map(director=>{
+                        return(
+                        <ActorCard key={director.id} actor={director}/>
+                        )
+                    })
+                }
+            </div>
+            <div className="row mt-3">
+                <h4 className="text-white">Cast</h4>
+                {
+                    movie.actors.map(actor=>{
+                        return(
+                        <ActorCard key={actor.id} actor={actor}/>
+                        )
+                    })
+                }
             </div>
         </div>
 

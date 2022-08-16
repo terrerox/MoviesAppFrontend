@@ -21,7 +21,7 @@ const MenuScreen = () => {
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav ms-auto">
           <li className="nav-item">
-            <a href="/login" className="btn btn-success bg-custom">Login</a>
+            <a href="/login" className="btn btn-success bg-custom text-dark">Login</a>
           </li>
         </ul>
       </div>

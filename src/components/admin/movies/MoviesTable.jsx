@@ -29,22 +29,23 @@ export const MoviesTable = () => {
         navigate('/admin/movie', locationData)
     }
     return (
-        <table className="table">
-            <thead>
+        <table className="table text-white table-bordered border border-white border-2 shadow shadow-4">
+            <thead className='text-dark fs-5 bg-custom'>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Image url</th>
                     <th scope="col">Trailer url</th>
                     <th scope="col">Release date</th>
+                    <th scope='col'>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {
-                    error && <h4 className="errorMsg">{errorMensage}</h4>
+                    error && <tr><td ><h4 className="errorMsg">{errorMensage}</h4></td></tr>
                 }
                 {
-                    ((!response && !error) && !movies) && <h4 className="loading">Loading...</h4>
+                    ((!response && !error) && !movies) && <tr><td><h4 className="loading">Loading...</h4></td></tr>
                 }
                 {
                     ((response && !error) && movies) && movies.map(movie => (
@@ -54,8 +55,7 @@ export const MoviesTable = () => {
                             <td>{movie.image}</td>
                             <td>{movie.youtubeVideoURL}</td>
                             <td>{movie.launchedDate}</td>
-                            <td><button onClick={() => goToUpdateMovie(movie)}>Edit</button></td>
-                            <td><button onClick={() => deleteMovie(movie.id)}>Delete</button></td>
+                            <td><button onClick={() => goToUpdateMovie(movie)} className="btn btn-warning w-50"><i className='fas fa-pen text-white'></i></button><button onClick={() => deleteMovie(movie.id)} className="btn btn-danger w-50"><i className='fas fa-trash text-white'></i></button></td>
                         </tr>
                     ))
                 }

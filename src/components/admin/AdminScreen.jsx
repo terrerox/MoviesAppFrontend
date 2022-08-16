@@ -1,6 +1,7 @@
 import React from 'react'
 import { MoviesTable } from './movies/MoviesTable'
 import { useNavigate } from 'react-router-dom';
+import { HomeHead } from '../layout/HomeHead';
 
 
 
@@ -14,23 +15,14 @@ export const AdminScreen = () => {
     navigate("/admin/movie", locationData)
   }
   return (
-    <main className='container'>
-      <section>
-        <div className='row'>
-          <h3 className='col-md-6'>
-            Movies
-          </h3>
-          <div className="col-md-6">
-            <button onClick={goToAddMovie}>
+    <div className='container-fluid content text-white vh-100'>
+      <HomeHead page="Admin Panel"/>
+        <div className='float-end mb-3'>
+          <button onClick={goToAddMovie} className="btn btn-primary">
               New movie
             </button>
-          </div>
         </div>
         <MoviesTable />
-      </section>
-      <section>
-
-      </section>
-    </main>
+    </div>
   )
 }

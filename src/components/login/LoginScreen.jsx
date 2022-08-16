@@ -4,6 +4,7 @@ import { AppContext } from '../../context';
 import accountService from '../../services/accountService';
 import viteimg from '../../assets/react.svg'
 import { useNavigate } from 'react-router-dom';
+import { HomeHead } from '../layout/HomeHead'
 
 export const LoginScreen = () => {
 
@@ -59,7 +60,8 @@ export const LoginScreen = () => {
   }
 
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid content vh-100'>
+      <HomeHead page="Login"/>
       <div className='row d-flex justify-content-center mt-4'>
         <div className='col-lg-4'>
         <div className='card bg-dark'>
@@ -69,7 +71,7 @@ export const LoginScreen = () => {
             </div>
             {
              state.error === true ? 
-            <div class="alert alert-danger mt-3" role="alert">
+            <div className="alert alert-danger mt-3" role="alert">
                 {state.errorMsg}
               </div>
               : ""
