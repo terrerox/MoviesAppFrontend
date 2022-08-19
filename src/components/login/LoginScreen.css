@@ -1,6 +1,7 @@
 :root{
-    --custom-color:#43d798;
+    --custom-color:#f3ff55 !important;
 }
+
 .bg-custom{
     background: var(--custom-color)!important;
 }

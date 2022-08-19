@@ -6,19 +6,26 @@ movieService.getAll = () => {
     .then(response => response)
 }
 
+movieService.getById = (id) => {
+  return httpClient.get(`Movie/GetByIdInfo/${id}`)
+    .then(response => response)
+}
+
+
 movieService.update = (movie) => {
-  return httpClient.put('movies', movie)
-    .then(response => response.data.data)
+  return httpClient.put('Movie/Update/' + movie.id, movie)
+    .then(response => response)
 }
 
 movieService.add = (movie) => {
-  return httpClient.post('movies', movie)
-    .then(response => response.data.data)
+  return httpClient.post('Movie/Create', movie)
+    .then(console.log)
+    .catch(console.log)
 }
 
 movieService.delete = (id) => {
-  return httpClient.delete(`movies/${id}`)
-    .then(response => response.data.data)
+  return httpClient.delete(`Movie/Delete/${id}`)
+    .then(console.log)
 }
 
 export default movieService

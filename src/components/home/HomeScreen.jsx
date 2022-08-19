@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Card } from './Card'
 import { useGetAll } from '../../hooks/useGetAll'
 import { useSearch } from '../../hooks/useSearch'
+import '../home/HomeScreen.css'
+import { HomeHead } from '../layout/HomeHead'
 
 export const HomeScreen = () => {
   const [inputValue, setInputValue] = useState("")
@@ -11,10 +13,12 @@ export const HomeScreen = () => {
 
   return (
     <main className="App">
-      <section className="search">
-        <input type="search" placeholder="Find by title" onChange={e => setInputValue(e.target.value)} />
+      <section className="content">
+        <HomeHead page="Home"/>
+        <section className="search">
+{/*         <input type="search" placeholder="Find by title" onChange={e => setInputValue(e.target.value)} />
+ */}
       </section>
-      <section className="cards">
         {
           error && <p className="errorMsg">{ errorMensage }</p>
         }
@@ -27,7 +31,7 @@ export const HomeScreen = () => {
           )
         }
 
-        <div className='row'>
+        <div className='row row--grid'>
           {response && (
             movies.map(movie => (
               <Card

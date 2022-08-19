@@ -4,11 +4,21 @@ export const useForm = ( initialState = {} ) => {
     const [values, setValues] = useState(initialState)
 
     const handleInputChange = ({ target }) => {
+        let value = target.value
+
+        if(target.name === 'actorIds'){
+            value = [target.value]
+        }
+
+        if(target.name === 'directorIds'){
+            value = [target.value]
+        }
+        
         setValues({
             ...values,
-            [ target.name ]: target.value
+            [ target.name ]: value
         })
     }
 
-    return [ values, handleInputChange ]
+    return [ values, handleInputChange, setValues ]
 }
